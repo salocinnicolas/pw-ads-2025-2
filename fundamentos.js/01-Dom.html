@@ -24,6 +24,21 @@
         const root = document.getElementById('root')
 
         root.appendChild(parag)
+
+        //criando nova div
+        const novaDiv = document.createElement('div')
+
+        novaDiv.textContent = 'Div criada com JavaScript'
+        novaDiv.style.border = '3px dotted green'
+        novaDiv.style.background = 'limegreen'
+        novaDiv.style.padding = '10px'
+        novaDiv.style.marginTop = '50px'
+        novaDiv.style.textAlign = 'center'
+        novaDiv.id = 'div-verde'
+
+        //fazendo com que a div root "adote" novaDiv como filha
+
+        root.appendChild(novaDiv)
     </script>
 </body>
 </html>
