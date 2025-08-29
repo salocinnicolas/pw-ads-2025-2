@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sauda {
+          font-family: Cambria, serif;
+          color: white;
+          background: indigo;
+          text-align: center;
+          margin-bottom: 20px;
+          border-radius: 8px;
+          padding: 12px;
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+        }
+      </style>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        /*
+            Em react. os elementos construidos dinamicamente são chamados Componentes
+            e podem ser produzidos por meio de funções
+
+            uma função de componentes no react possui três caracteristicas:
+            1° ~>seu nome começa com letra maiuscula
+            2°~> podem receber props com parametros, entre {}
+            3°~> retornam um unico elemento, o qual pode ser container para outros elementos
+        */
+
+        function Saudacao({nome, msg}){
+            return <div className="sauda"> {msg}, {nome}! </div>
+        }
+
+        const saudacao1 = Saudacao({msg: 'bom dia', nome: 'Dona Clemeu'})
+
+        const saudacao2 = <Saudacao nome="should be burning in hell" msg="Os passaros estão cantando, dias como esse, pessoas como você" />
+
+        const container=
+        <>
+            {saudacao1}
+            {saudacao2}
+            {/*criando um componente direto do container*/}
+            <Saudacao msg="boa tarde" nome= "Senhor Adnilson" />
+        </>
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(container)
+    </script>
+
+</body>
+</html>
