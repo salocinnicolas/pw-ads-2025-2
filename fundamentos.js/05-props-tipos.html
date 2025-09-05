@@ -41,16 +41,29 @@
         const Mensagem = props => <div className="msg" {...props}/>
 
         
+        const Aviso= ({id, children}) => <div className="msg" id={id}
+            children={children} />
+
         const propsMsg1={
             id: 'msg1',
             title: 'Primeira mensagem',
-            children: 'i warned about the stairs, dude',
+            children: 'i warned about the stairs dog! I warned you!',
             propFicticia: 'teste'
         }
 
         const container=
             <>
                 <Mensagem {...propsMsg1}/>
+
+                {/* No componete Mensagem abaixo, todas as props serão recebidas e processados*/}
+                <Mensagem id ="msg2" title ="Segunda mensagem" teste="testando"> 
+                    Doe sangue! Vanpiros em fome!
+                </Mensagem>
+                {/* Já no componete Aviso apenas as props id e children serão processadas, as demais serão ignoradas */}
+                <Aviso id="aviso1" title="segundo aviso" teste="testando">
+                    Lobisomen a solta!
+                </Aviso>
+
             </>
         
         const root = ReactDOM.createRoot(document.getElementById('root'))
