@@ -20,6 +20,13 @@
         margin: 5px;
         color: gold;
     }
+    .cor3 {
+        border-radius: 5px;
+        border: 3px solid royalblue;
+        padding: 5px;
+        margin: 5px;
+        color: greenyellow;
+    }
   </style>
 </head>
 <body>
@@ -55,25 +62,16 @@
 				um cálculo simples (2025 menos o ano de nascimento informado).
     */
 
-    function Pessoal({nome, sobrenome, dia, mes, ano}) {
-      
-      return (
-        <>
-          <p className="cor1">{nome} {sobrenome}</p>
-          <p className="cor2">{dia}/{mes}/{ano}</p>
-          <div> <Soma ano={ano} nome={nome} className="cor2"/></div>
-        </>
-      );
-    }
-
-    const Soma = ({ano, nome, ...props}) =>
-        <p class="soma" {...props}>
-            A idade do {nome} no final de 2025 é: {2025 - ano}
-        </p>
+    const Pessoal = ({nome, sobrenome, dia, mes, ano}) =>      
+      <>
+        <p className="cor1">{nome} {sobrenome}</p>
+        <p className="cor2">{dia}/{mes}/{ano}</p>
+        <div className="cor3">A idade do {nome} no final de 2025 é: {2025 - ano}</div>
+     </>
 
     const container=
       <>
-        <Pessoal id="soma1" nome="Nícolas" sobrenome="de Oliveira e Melo" dia="01" mes="08" ano={2002} />
+        <Pessoal nome="Nícolas" sobrenome="de Oliveira e Melo" dia={1} mes={8} ano={2002} />
 
       </>
     const root = ReactDOM.createRoot(document.getElementById('root'))
