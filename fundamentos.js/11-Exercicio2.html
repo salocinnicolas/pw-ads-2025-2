@@ -35,11 +35,12 @@
 
     */
    function Form(){
-    let numberd, numberc
+    let numberd, numberc, cot
     
     const numberdRef = React.useRef()
     const numbercRef = React.useRef()
     const resultadoRef = React.useRef()
+    const cotRef = React.useRef()
 
     function handleChange(event){
       numberd = numberdRef.current.value
@@ -49,8 +50,16 @@
         resultadoRef.current.textContent = numberc + "R$"
       }
       else{
-        numberc = numbercRef.current.value / 5.39
-        resultadoRef.current.textContent = numberc + "D$"
+        cot = cotRef.current.value
+        numberc = numbercRef.current.value
+        numberc = numberc / cot
+        resultadoRef.current.textContent = numberc.toLocaleString(
+          'en-US',
+          {
+            style: 'currency',
+            currency: 'USD'
+          }
+        )
       }
     }
 
@@ -70,7 +79,15 @@
             <label>
               <label>
                 <span>Coloque o numero</span>
-                <input ref={numbercRef} onChange={handleChange} />
+                <input type="number" ref={numbercRef} onChange={handleChange} />
+              </label>
+            </label>  
+          </div>
+          <div>
+            <label>
+              <label>
+                <span>Coloque a cotação</span>
+                <input type="number" ref={cotRef} onChange={handleChange} />
               </label>
             </label>  
           </div>
