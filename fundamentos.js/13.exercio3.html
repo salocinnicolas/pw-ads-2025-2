@@ -15,6 +15,43 @@
         /*
             refazer o arquirvo 10 usando variáveis de estado
         */
+        function Form(){
+            const [nome, setNome] = React.useState("")
+            const [maui, setMaui] = React.useState(false)
+            const [butt, setButt] = React.useState(false)
+            
+            const resultado = maui ? nome.toUpperCase() : nome
+            //                if(maui){result=nome.upper}else{resul=nome} ()          
+            if(butt){
+                event.preventDefault()
+                alert(`Olá ${nome}`)
+            }
+
+
+            return<>
+                <h1>Exercicio 3</h1>
+                <form>
+                    <div>
+                        <label>
+                            <span>Coloque seu nome</span> <br />
+                            <input  onChange={event => setNome(String(event.target.value))} />    
+                     </label>    
+                    </div>
+                    <div>
+                        <label>
+                            <span>Colocar o nome em maiúsculas</span> <br />
+                            <input type="checkbox" onChange={event => setMaui(event.target.checked)} />
+                        </label>
+                    </div>
+                    <div>{resultado}</div>
+                    <div>
+                        <button type="submit" onClick={event => setButt(true)}>OK</button>    
+                    </div>
+                </form>
+            </>
+        }
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<Form />)
     </script>
 </body>
 </html>
