@@ -26,7 +26,7 @@ console.log('primeiro e segundo carros: ', {x, y})
 const [a, , b]= carros
 console.log('primeiro e terceiro carros: ', {a, b})
 
-//desetruturação parcial: 1° e 3° valores
+//desetruturação parcial: 2° e 3° valores
 const [, m, n]= carros
 console.log('segundo e terceiro carros: ', {m, n})
 

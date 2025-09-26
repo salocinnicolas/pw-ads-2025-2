@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <div id="root"></div>
+    <script type="text/babel">
+        function Form(){
+            const [maior, setRaioMaior] = React.useState(0)
+            const [menor, setRaioMenor] = React.useState(0)
+            //"const [maior, setRaioMaior] = React.useState(0)" é para salvar o resultado do input se não é salvo
+            const area = maior * menor * Math.PI
+
+            const resultado = `A área da elipse é: ${area.toLocaleString('pt-br',{
+                minimumFractionDigits: 4,
+                MaximumFractionDigits: 4
+            })}`//usei a mesma forma da prova de colocar um limite em numeros com virgula, pois não queria pesquisar no google com medo de aparecer a ai do google
+            return<>
+                <h1>Cálculo da área de uma elipse</h1>
+                <form>
+                    <div>
+                        <label>
+                            <span>Medida do raio maior:</span><br/>
+                            <input type="number" onChange={event => setRaioMaior(Number(event.target.value))}/>
+                            <div>{/*Usei setRaioMaior para pegar o valor do numero colocado*/}</div>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <span>Medida do raio menor:</span><br/>
+                            <input type="number" onChange={event => setRaioMenor(Number(event.target.value))}/>
+                            <div>{/*Usei setRaioMenor para pegar o valor do numero colocado*/}</div>
+                        </label>
+                    </div>
+                    <div>{resultado}</div>
+                </form>
+            </>
+        }
+        
+        const root = ReactDOM.createRoot(document.querySelector('#root'))
+        root.render(<Form />)
+    </script>
+</body>
+</html>
