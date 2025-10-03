@@ -23,8 +23,8 @@ function Greeting({initialName = ''}) {
   )
 }
 
-function App() {
+function Exercicio01() {
   return <Greeting />
 }
 
-export default App
+export default Exercicio01
