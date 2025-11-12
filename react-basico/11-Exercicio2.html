@@ -1,103 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <div id="root"></div>
-    <script type="text/babel">
-        /*
-    1) Crie um formulário em React e coloque nele um input numérico com o label "Valor em reais".
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
 
-    2) Coloque outro input numérico com o label "Cotação do dólar".
+  <script type="text/babel">
 
-    3) Coloque, também, uma div para exibir o resultado da conversão de moeda.
+    function Form() {
 
-    4) Crie e coloque hooks useRef nos três elementos criados.
+      /* 4) Crie e coloque hooks useRef nos três elementos criados. */
+      const valReaisRef = React.useRef()
+      const cotDolarRef = React.useRef()
+      const resultadoRef = React.useRef()
 
-    5) Escreva uma única função handleChange para interceptar a mudança 
+      /* 5) Escreva uma única função handleChange para interceptar a mudança 
       nos dois inputs, efetuar o cálculo da conversão e atualizar o valor
-      de uma variável com o resultado.
+      de uma variável com o resultado. */
+      function handleChange(event) {
+        // Usando Number() para garantir que o resultado do cálculo será numérico
+        const valReais = Number(valReaisRef.current.value)
+        const cotDolar = Number(cotDolarRef.current.value)
 
-    6) Usando a variável que foram atualizada em handleChange, 
-      exiba na div de resultado o valor convertido.
+        // Cálculo da cotação
+        const valorConvertido = valReais / cotDolar
 
+        /* 6) Usando a variável que foram atualizada em handleChange, 
+        exiba na div de resultado o valor convertido. */
+        // Usando a função toLocaleString() do JavaScript para exibir o
+        // resultado com a formatação e o símbolo de dólar
+        resultadoRef.current.textContent = valorConvertido.toLocaleString(
+          'en-US',    // Faz a conversão para inglês dos EUA
+          {
+            style: 'currency',    // Formata como moeda
+            currency: 'USD'       // USD = dólar dos EUA
+          }
+        )
+
+      }
+
+      return <>
+        <h1>Conversor de moedas</h1>
+        <form>
+          {/* 1) Crie um formulário em React e coloque nele um input numérico com o label "Valor em reais". */}
+          <div>
+            <label>
+              <span>Valor em reais:</span> <br />
+              <input type="number" ref={valReaisRef} onChange={handleChange} />
+            </label>
+          </div>
+          {/* 2) Coloque outro input numérico com o label "Cotação do dólar". */}
+          <div>
+            <label>
+              <span>Cotação do dólar:</span> <br />
+              <input type="number" ref={cotDolarRef} onChange={handleChange} />
+            </label>
+          </div>
+          {/* 3) Coloque, também, uma div para exibir o resultado da conversão de moeda. */}
+          <div ref={resultadoRef} />
+        </form>
+      </>
+    }
+
+    /*
     7) Observação: neste formulário não há o botão de enviar. Portanto, não é necessário
       ter a função handleSubmit nem chamá-la no onSubmit do form.
 
     8) Faça o necessário para que o formulário seja renderizado ao exibir a página.
-
     */
-   function Form(){
-    let numberd, numberc, cot
-    
-    const numberdRef = React.useRef()
-    const numbercRef = React.useRef()
-    const resultadoRef = React.useRef()
-    const cotRef = React.useRef()
-
-    function handleChange(event){
-      numberd = numberdRef.current.value
-
-      if(numberd == 1){
-        numberc = numbercRef.current.value
-        resultadoRef.current.textContent = numberc + "R$"
-      }
-      else{
-        cot = cotRef.current.value
-        numberc = numbercRef.current.value
-        numberc = numberc / cot
-        resultadoRef.current.textContent = numberc.toLocaleString(
-          'en-US',
-          {
-            style: 'currency',
-            currency: 'USD'
-          }
-        )
-      }
-    }
-
-    return <>
-      <h1>Troca de valores</h1>
-        <form>
-          <div>
-            <label>
-              <span>Escolha  valor em reais, ou para dolars</span>
-              <select ref={numberdRef} onChange={handleChange}>
-                <option value="1">Reais</option>
-                <option value="2">Dolar</option>
-              </select>
-            </label>  
-          </div>
-          <div>
-            <label>
-              <label>
-                <span>Coloque o numero</span>
-                <input type="number" ref={numbercRef} onChange={handleChange} />
-              </label>
-            </label>  
-          </div>
-          <div>
-            <label>
-              <label>
-                <span>Coloque a cotação</span>
-                <input type="number" ref={cotRef} onChange={handleChange} />
-              </label>
-            </label>  
-          </div>
-          <div ref={resultadoRef}>
-          </div>
-        </form>
-    </>
-   }
     const root = ReactDOM.createRoot(document.querySelector('#root'))
     root.render(<Form />)
-    </script>
+
+  </script>
+  
 </body>
 </html>

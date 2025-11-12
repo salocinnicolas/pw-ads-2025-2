@@ -11,8 +11,6 @@ function Name({name, onNameChange}) {
 
 // 🐨 aceite as props `animal` e `onAnimalChange` neste componente
 function FavoriteAnimal({animal, onAnimalChange}) {
-  // 💣 delete this, it's now managed by the App
-  
   return (
     <div>
       <label htmlFor="animal">Favorite Animal: </label>
@@ -26,15 +24,14 @@ function FavoriteAnimal({animal, onAnimalChange}) {
 }
 
 // 🐨 descomente isso
-// function Display({name, animal}) {
-//   return <div>{`Olá ${name}, seu animal favorito é: ${animal}!`}</div>
-// }
-
+function Display({name, animal}) {
+  return <div>{`Olá ${name}, seu animal favorito é: ${animal}!`}</div>
+}
 
 // 💣 exclua esse componente e use o novo
-function Display({name, animal}) {
-   return <div>{`Hey ${name}, you are great!\n And cool animal, ${animal}, sure is cool!`}</div>
-}
+// function Display({name}) {
+//    return <div>{`Hey ${name}, you are great!`}</div>
+// }
 
 function Exercicio03() {
   // 🐨 adicione um useState para o animal
@@ -44,8 +41,8 @@ function Exercicio03() {
     <form>
       <Name name={name} onNameChange={event => setName(event.target.value)} />
       {/* 🐨 passe o animal e a prop onAnimalChange aqui (similar ao componente Name acima) */}
-      <FavoriteAnimal
-        animal={animal}
+      <FavoriteAnimal 
+        animal={animal} 
         onAnimalChange={event => setAnimal(event.target.value)}
       />
       {/* 🐨 passe a prop do animal aqui */}

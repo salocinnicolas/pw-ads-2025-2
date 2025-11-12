@@ -2,7 +2,16 @@ import * as React from 'react'
 
 function Board() {
   // 🐨 squares é o estado para este componente. Adicione useState para squares
-  const [squares, setSquares] = React.useState(Array(9).fill(null))
+  //const squares = Array(9).fill(null)
+  //const [squares, setSquares] = React.useState(Array(9).fill(null))
+
+  // Restaurando o estado salvo no local storage, caso haja
+  // Colocamos a leitura do estado dentro de uma função para implementar
+  // "lazy intializing"
+  const [squares, setSquares] = React.useState(
+    // JSON.parse ~> lê uma string e tenta converter para objeto
+    () => JSON.parse(window.localStorage.getItem('squares')) ?? Array(9).fill(null)
+  )
 
   // 🐨 Precisaremos dos seguintes itens de estados derivados:
   // - nextValue ('X' ou 'O')
@@ -13,6 +22,7 @@ function Board() {
   const nextValue = calculateNextValue(squares)
   const winner = calculateWinner(squares)
   const status = calculateStatus(winner, squares, nextValue)
+
   // Esta é a função que o manipulador de clique no quadrado irá chamar. `square`
   // deve ser um índice. Portanto, se você clicar sobre o quadrado central, o
   // valor será `4`.
@@ -29,13 +39,14 @@ function Board() {
     //
     // 🐨 faça uma cópia da matriz dos quadrados
     // 💰 `[...squares]` é do que você precisa!)
-    const squareCopy = [...squares]
+    const squaresCopy = [...squares]
     
     // 🐨 ajuste o valor do quadrado que foi selecionado
     // 💰 `squaresCopy[square] = nextValue`
-    squareCopy[square] = nextValue
+    squaresCopy[square] = nextValue
+    
     // 🐨 atribua a cópia à matriz dos quadrados
-    setSquares(squareCopy)
+    setSquares(squaresCopy)
   }
 
   function restart() {
@@ -52,9 +63,9 @@ function Board() {
     )
   }
 
-  //salva o jogo a cada jogada
+  // Salva o estado do jogo a cada jogada
   React.useEffect(() => {
-    //JSON.stringify converte um objeto para string
+    // JSON.stringify converte um objeto (que pode ser um vetor) em string
     window.localStorage.setItem('squares', JSON.stringify(squares))
   }, [squares])
 
@@ -81,7 +92,7 @@ function Board() {
         restart
       </button>
       <hr />
-      <div style={{ fontFamily: 'monospace'}}>
+      <div style={{ fontFamily: 'monospace' }}>
         {JSON.stringify(squares)}
       </div>
     </div>
